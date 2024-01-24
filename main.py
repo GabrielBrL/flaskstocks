@@ -1,4 +1,5 @@
 import fundamentus
+import json
 from flask import Flask, jsonify
 import os
 
@@ -14,7 +15,8 @@ def hello_world(key):
     if(key == "gab2020"):
         df = fundamentus.get_resultado()
         dictionary = df.to_dict(orient='index')
-        return dictionary
+        json_resultado = json.dumps(dictionary)
+        return json_resultado
     else:
         return "Não autorizado"
 
