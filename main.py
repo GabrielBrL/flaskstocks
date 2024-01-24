@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
+    return "eu te amo MUITO linda hehe <3"
 
 @app.route("/<key>")
 def hello_world(key):
