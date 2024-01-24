@@ -15,11 +15,10 @@ def hello_world(key):
     if(key == "gab2020"):
         df = fundamentus.get_resultado()
         dictionary = df.to_dict(orient='index')
-        json_resultado = json.dumps(dictionary)
+        json_resultado = jsonify(dictionary)
         return json_resultado
     else:
         return "Não autorizado"
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
