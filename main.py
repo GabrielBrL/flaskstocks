@@ -1,5 +1,5 @@
-import fundamentus
-import json
+import resultado as fundamentus
+import detalhes
 from flask import Flask, jsonify
 import os
 
@@ -23,7 +23,7 @@ def hello_world(key):
 @app.route("/<key>/<papel>")
 def get_detalhes(key, papel):
     if(key == "gab2020"):
-        df = fundamentus.get_detalhes_papel(papel)
+        df = detalhes.get_detalhes_papel_web(papel)
         dictionary = df.to_dict(orient='index')
         json_resultado = jsonify(dictionary)
         return json_resultado
