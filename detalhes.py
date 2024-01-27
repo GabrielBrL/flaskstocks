@@ -264,15 +264,16 @@ def get_detalhes_raw(papel='WEGE3'):
            'Accept': 'text/html, text/plain, text/css, text/sgml, */*;q=0.01',
            'Accept-Encoding': 'gzip, deflate',
            }
+    
+    content = requests.get(url, headers=hdr)
+    # with requests_cache.enabled():
+    #     content = requests.get(url, headers=hdr)
 
-    with requests_cache.enabled():
-        content = requests.get(url, headers=hdr)
-
-        if content.from_cache:
-            logging.debug('.../detalhes.php?papel={}: [CACHED]'.format(papel))
-        else: # pragma: no cover
-            logging.debug('.../detalhes.php?papel={}: sleeping...'.format(papel))
-            time.sleep(.500) # 500 ms
+    #     if content.from_cache:
+    #         logging.debug('.../detalhes.php?papel={}: [CACHED]'.format(papel))
+    #     else: # pragma: no cover
+    #         logging.debug('.../detalhes.php?papel={}: sleeping...'.format(papel))
+    #         time.sleep(.500) # 500 ms
 
     ## parse
     tables_html = pd.read_html(content.text, decimal=",", thousands='.')
