@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "acesso restrito"
+    return "te amo tetinha, voc~e é minha vida! (chupa meu mámá..... vai chupando ai vai.... faz bem pra saúde)"
 
 @app.route("/<key>")
 def hello_world(key):
