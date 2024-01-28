@@ -235,7 +235,7 @@ def get_detalhes_papel_web(papel):
     vals = vals + list(df[1]) # OBS: ignoring for now...   
 
     keys = keys + list(df[2]) # Indicadores 1
-    vals = vals + list(df[3])
+    vals = vals + list(df[3]) #
 
     hf = OrderedDict()
     for i, k in enumerate(keys):
