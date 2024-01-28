@@ -229,9 +229,13 @@ def get_detalhes_papel_web(papel):
     df[0] = 'Oscilacao_' + df[0]  # more specific key name
 
     df[1] = utils.fmt_dec(df[1])    # oscilacoes
+    df[3] = utils.fmt_dec(df[3])    # indicadores 1
 
     keys = keys + list(df[0]) # oscilacoes
     vals = vals + list(df[1]) # OBS: ignoring for now...   
+
+    keys = keys + list(df[2]) # Indicadores 1
+    vals = vals + list(df[3])
 
     hf = OrderedDict()
     for i, k in enumerate(keys):
