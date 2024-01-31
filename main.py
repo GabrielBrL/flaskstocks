@@ -1,4 +1,5 @@
 import resultado as fundamentus
+import yahoofinance as yah
 import detalhes
 from flask import Flask, jsonify
 import os
@@ -10,23 +11,17 @@ app = Flask(__name__)
 def index():
     return "Acesso restrito"
 
-@app.route("/<key>")
-def hello_world(key):
-    if(key == "gab2020"):
-        df = fundamentus.get_resultado()    
-        dictionary = df.to_dict(orient='index')
-        json_resultado = jsonify(dictionary)
-        return json_resultado
+@app.route("/<key>/<papeis>")
+def hello_world(key, papeis):
+    if(key == "gab2020"):        
+        return jsonify(yah.get_cotacao(papeis))
     else:
         return "Não autorizado"
     
-@app.route("/<key>/<papel>")
-def get_detalhes(key, papel):
+@app.route("/<key>/papel/<papel>")
+def get_detalhes_papel(key, papel):
     if(key == "gab2020"):
-        df = detalhes.get_detalhes_papel_web(papel)
-        dictionary = df.to_dict(orient='index')
-        json_resultado = jsonify(dictionary)
-        return json_resultado
+        return jsonify(yah.get_detalhes_papel(papel))        
     else:
         return "Não autorizado"
 
