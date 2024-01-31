@@ -14,7 +14,7 @@ def index():
 @app.route("/<key>/<papeis>")
 def hello_world(key, papeis):
     if(key == "gab2020"):        
-        return jsonify(yah.get_cotacao(papeis))
+        return yah.get_cotacao(papeis)
     else:
         return "Não autorizado"
     
