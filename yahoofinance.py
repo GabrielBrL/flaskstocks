@@ -13,7 +13,7 @@ def get_cotacao(papel):
     date_before = data_now - timedelta(days=7)     
     result =  pdr.get_data_yahoo(papel+".SA", date_before.strftime("%Y-%m-%d"), data_now.strftime("%Y-%m-%d"))["Adj Close"]
     df = pd.DataFrame(result)    
-    dictresult = df.to_json(orient='columns', date_format='iso')
-    return dictresult
-
-print(get_cotacao("petr4"))
+    dictresult = df.to_dict(orient="dict")
+    value = dictresult['Adj Close']
+    data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}
+    return data_str_keys
