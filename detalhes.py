@@ -317,6 +317,21 @@ def list_papel_all():
     lst = list(df['Papel'])
     logging.info('members in list = {}'.format(len(lst)))
 
+    url_fii = 'https://fundamentus.com.br/fii_resultado.php?papel='
+    
+    with requests_cache.enabled():
+        content_fii = requests.get(url_fii, headers=hdr)
+
+        if content_fii.from_cache:
+            logging.debug('list .../detalhes.php?papel= : [CACHED]')
+        else: # pragma: no cover
+            logging.debug('list .../detalhes.php?papel= : sleeping...')
+            time.sleep(.500) # 500 ms
+    
+    df_fii = pd.read_html(content_fii.text, decimal=",", thousands='.')[0]
+
+    lst += list(df_fii['Papel'])
+
     return lst
 
 

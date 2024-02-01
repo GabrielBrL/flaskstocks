@@ -25,5 +25,12 @@ def get_detalhes_papel(key, papel):
     else:
         return "Não autorizado"
 
+@app.route("/<key>/papeis")
+def get_papeis(key):
+    if(key == "gab2020"):
+        return jsonify(detalhes.list_papel_all())        
+    else:
+        return "Não autorizado"
+        
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
