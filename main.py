@@ -10,11 +10,11 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "Acesso restrito"
-
-@app.route("/<key>/<papeis>")
-def hello_world(key, papeis):
-    if(key == "gab2020"):        
-        return yah.get_cotacao(papeis)
+    
+@app.route("/<key>/<papel>/<variacao>")
+def get_variacao(key,papel,variacao):
+    if(key == "gab2020"):
+        return jsonify(yah.get_hist(papel,variacao))
     else:
         return "Não autorizado"
     
