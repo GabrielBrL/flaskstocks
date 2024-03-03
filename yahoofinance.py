@@ -28,7 +28,7 @@ def get_variacao(papel):
     primeiro_valor = next(iter(data_str_keys.values()))
     ultima_data = list(data_str_keys.keys())[-1]
     ultimo_valor = data_str_keys[ultima_data]
-    variacaoPerc = ((ultimo_valor - primeiro_valor) / ultimo_valor)*100
+    variacaoPerc = ((ultimo_valor - primeiro_valor) / ultimo_valor)
     variacaoValue = ultimo_valor - primeiro_valor
     return {ultima_data : [variacaoPerc, variacaoValue]}
 
