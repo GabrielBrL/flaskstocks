@@ -10,7 +10,9 @@ def get_detalhes_papel(papel):
     index = list(var.keys())[0]    
     percVar = var[index][0]
     vlrVar = var[index][1]
-    dtCotacao = index
+    ultVar = var[index][2]
+    dtCotacao = index    
+    data.info["CurrentPrice"] = ultVar
     data.info["DataUltCotacao"] = dtCotacao
     data.info["VariacaoPercentual"] = percVar
     data.info["VariacaoValue"] = vlrVar
@@ -30,7 +32,7 @@ def get_variacao(papel):
     ultimo_valor = data_str_keys[ultima_data]
     variacaoPerc = ((ultimo_valor - primeiro_valor) / ultimo_valor)
     variacaoValue = ultimo_valor - primeiro_valor
-    return {ultima_data : [variacaoPerc, variacaoValue]}
+    return {ultima_data : [variacaoPerc, variacaoValue, ultimo_valor]}
 
 def get_hist(papel, variacao):
     yfr.pdr_override()
