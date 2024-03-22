@@ -1,6 +1,7 @@
 import resultado as fundamentus
 import yahoofinance as yah
 import detalhes
+import newgoogle
 from flask import Flask, jsonify
 import os
 
@@ -31,6 +32,14 @@ def get_papeis(key):
         return jsonify(detalhes.list_papel_all())        
     else:
         return "Não autorizado"
+    
+@app.route("/<key>/news/<papel>")
+def get_news(key, papel):
+    if(key == "gab2020"):
+        return jsonify(newgoogle.get_news(papel))
+    else:
+        return "Não autorizado"
         
 if __name__ == '__main__':
+    app.config['JSON_AS_ASCII'] = False
     app.run(debug=True, port=os.getenv("PORT", default=5000))
