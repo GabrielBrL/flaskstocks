@@ -8,5 +8,3 @@ def get_news(ticket):
     googleNews.search(ticket)
     result = googleNews.result()     
     return result
-
-print(get_news('petr4'))
