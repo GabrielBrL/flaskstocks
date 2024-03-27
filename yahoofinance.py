@@ -1,6 +1,7 @@
 import yfinance as yfr
 import pandas_datareader.data as pdr
 import pandas as pd
+import detalhes
 from datetime import datetime, timedelta
 
 def get_detalhes_papel(papel):    
@@ -43,4 +44,13 @@ def get_hist(papel, variacao):
     dict = df.to_dict(orient="dict")
     value = dict['Close']
     data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}    
+    return data_str_keys
+
+def get_history_dividends(papel):
+    acoes = yfr.Ticker(f'{papel}.SA')
+    history_divs = acoes.get_dividends()
+    df = pd.DataFrame(history_divs)
+    dict = df.to_dict(orient="dict")
+    value = dict['Dividends']
+    data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}
     return data_str_keys

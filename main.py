@@ -33,6 +33,13 @@ def get_papeis(key):
     else:
         return "Não autorizado"
     
+@app.route("/<key>/dividends/<papel>")
+def get_divs(key, papel):
+    if(key == "gab2020"):
+        return jsonify(yah.get_history_dividends(papel))        
+    else:
+        return "Não autorizado"
+    
 @app.route("/<key>/news/<papel>")
 def get_news(key, papel):
     if(key == "gab2020"):
