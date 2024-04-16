@@ -2,6 +2,7 @@ import resultado as fundamentus
 import yahoofinance as yah
 import detalhes
 import newgoogle
+import selic
 from flask import Flask, jsonify
 import os
 
@@ -44,6 +45,13 @@ def get_divs(key, papel):
 def get_news(key, papel):
     if(key == "gab2020"):
         return jsonify(newgoogle.get_news(papel))
+    else:
+        return "Não autorizado"
+
+@app.route("/<key>/taxa/<papel>")
+def get_taxas(key, papel):
+    if(key == "gab2020"):
+        return jsonify(selic.get_rates(papel))
     else:
         return "Não autorizado"
         
