@@ -25,9 +25,10 @@ def get_variacao(papel):
     acao = yfr.Ticker(f"{ticker}.SA")
     historico_precos = acao.history(period='2d')
     df = pd.DataFrame(historico_precos)
+    df.fillna(0, inplace=True)    
     dict = df.to_dict(orient="dict")
     value = dict['Close']
-    data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}
+    data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}    
     primeiro_valor = next(iter(data_str_keys.values()))
     ultima_data = list(data_str_keys.keys())[-1]
     ultimo_valor = data_str_keys[ultima_data]
