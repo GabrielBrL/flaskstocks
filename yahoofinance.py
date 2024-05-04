@@ -1,7 +1,5 @@
 import yfinance as yfr
-import pandas_datareader.data as pdr
 import pandas as pd
-import detalhes
 from datetime import datetime, timedelta
 
 def get_detalhes_papel(papel):    
@@ -19,8 +17,7 @@ def get_detalhes_papel(papel):
     data.info["VariacaoValue"] = vlrVar
     return data.info
 
-def get_variacao(papel):
-    yfr.pdr_override()
+def get_variacao(papel):    
     ticker = papel
     acao = yfr.Ticker(f"{ticker}.SA")
     historico_precos = acao.history(period='2d')
@@ -36,12 +33,12 @@ def get_variacao(papel):
     variacaoValue = ultimo_valor - primeiro_valor
     return {ultima_data : [variacaoPerc, variacaoValue, ultimo_valor]}
 
-def get_hist(papel, variacao):
-    yfr.pdr_override()
+def get_hist(papel, variacao):    
     ticker = papel
     acao = yfr.Ticker(f"{ticker}.SA")
-    historico_precos = acao.history(period=variacao)
+    historico_precos = acao.history(period=variacao)    
     df = pd.DataFrame(historico_precos)
+    df.fillna(0, inplace=True)  
     dict = df.to_dict(orient="dict")
     value = dict['Close']
     data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}    
@@ -51,6 +48,7 @@ def get_history_dividends(papel):
     acoes = yfr.Ticker(f'{papel}.SA')
     history_divs = acoes.get_dividends()
     df = pd.DataFrame(history_divs)
+    df.fillna(0, inplace=True)  
     dict = df.to_dict(orient="dict")
     value = dict['Dividends']
     data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}
