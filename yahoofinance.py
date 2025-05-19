@@ -2,7 +2,7 @@ import yfinance as yfr
 import pandas as pd
 from datetime import datetime, timedelta
 
-def get_detalhes_papel(papel):    
+def get_detalhes_papel(papel):
     data = yfr.Ticker(papel+".SA")    
     #data.info['DataUltCotacao'] = get_variacao(papel)
     var = get_variacao(papel)
@@ -53,3 +53,5 @@ def get_history_dividends(papel):
     value = dict['Dividends']
     data_str_keys = {key.strftime('%Y-%m-%d'): value for key, value in value.items()}
     return data_str_keys
+
+print(get_detalhes_papel("vale3"))
